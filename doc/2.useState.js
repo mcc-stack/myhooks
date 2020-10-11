@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 let hookStates = []; //保存状态的数组 [0,0]
 let hookIndex = 0; //索引
+
 function useState(initialState) {
   hookStates[hookIndex] = hookStates[hookIndex] || initialState;
   let currentIndex = hookIndex;
@@ -14,9 +15,10 @@ function useState(initialState) {
   }
   return [hookStates[hookIndex++], setState];
 }
+
 function Counter() {
-  let [number1, setNumber1] = useState(0); //hookStates[0]=0 0
-  let [number2, setNumber2] = useState(0); //hookStates[1]=0 1
+  let [number1, setNumber1] = useState(0); //hookStates[0] = 0 0
+  let [number2, setNumber2] = useState(0); //hookStates[1] = 0 1
   return (
     <div>
       <p>{number1}</p>
@@ -27,8 +29,11 @@ function Counter() {
     </div>
   );
 }
+
 function render() {
   hookIndex = 0;
   ReactDOM.render(<Counter />, document.getElementById('root'));
 }
+
 render();
+const [state, dispatch] = useReducer(reducer, initialState, init);

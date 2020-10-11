@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 let lastState; //上一个状态
+
 function useState(initialState) {
   lastState = lastState || initialState;
   function setState(newState) {
@@ -9,6 +10,7 @@ function useState(initialState) {
   }
   return [lastState, setState];
 }
+
 function Counter() {
   let [number, setNumber] = useState(0);
   return (

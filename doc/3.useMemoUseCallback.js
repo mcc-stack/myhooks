@@ -16,8 +16,9 @@ function useState(initialState) {
   }
   return [hookStates[hookIndex++], setState];
 }
+
 function useCallback(callback, dependencies) {
-  if (hookStates[hookIndex]) {
+  if (hookStates[hookIndex] !== undefined) {
     //说明不是第一次,
     let [lastCallback, lastDependencies] = hookStates[hookIndex];
     //判断一下新的依赖数组中的每一项是否跟上次完全相等
@@ -38,6 +39,7 @@ function useCallback(callback, dependencies) {
     return callback;
   }
 }
+
 function useMemo(factory, dependencies) {
   if (hookStates[hookIndex]) {
     //说明不是第一次,
@@ -62,6 +64,7 @@ function useMemo(factory, dependencies) {
     return newMemo;
   }
 }
+
 let Child = ({ data, onButtonClick }) => {
   console.log('Child render');
   return <button onClick={onButtonClick}>{data.number}</button>;
@@ -74,13 +77,16 @@ let Child = ({ data, onButtonClick }) => {
   }
 } */
 Child = React.memo(Child); //useMemo和memo没有一点关系
+
 function App() {
   const [number, setNumber] = useState(0);
   const [name, setName] = useState('zhufeng');
+
   //每次渲染App都要声明一个新对象 1参数是生成对象的工厂 依赖的变量
   let data = useMemo(() => ({ number }), [number]);
   //每次渲染App都要声明一个新的函数,进行优化,依赖变量发生改变的话才会重新执行得到函数,否则始终用上次的函数
   let addClick = useCallback(() => setNumber(number + 1), [number]);
+
   return (
     <div>
       <input value={name} onChange={e => setName(e.target.value)} />
