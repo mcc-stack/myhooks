@@ -1,17 +1,9 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-//useState是useReducer的语法糖
+
 let hookStates = []; //保存状态的数组 [0,0]
 let hookIndex = 0; //索引
-/* function useState(initialState){
-   hookStates[hookIndex] = hookStates[hookIndex]||initialState;
-   let currentIndex = hookIndex;
-   function setState(newState){
-     hookStates[currentIndex]=newState;
-     render();
-   }
-   return [hookStates[hookIndex++],setState];
-} */
+
 function useReducer(reducer, initialState) {
   hookStates[hookIndex] = hookStates[hookIndex] || initialState;
   let currentIndex = hookIndex;

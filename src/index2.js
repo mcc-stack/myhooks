@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
+import ActionTable from './components/ActionTable';
 let lastRef;
 function useRef(value) {
   lastRef = lastRef || { current: value };
@@ -25,7 +26,8 @@ function Counter() {
     </div>
   );
 }
-function render() {
+function render() {<ActionTable /> 
+
   ReactDOM.render(<Counter />, document.getElementById('root'));
 }
 render();

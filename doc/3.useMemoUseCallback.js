@@ -69,14 +69,8 @@ let Child = ({ data, onButtonClick }) => {
   console.log('Child render');
   return <button onClick={onButtonClick}>{data.number}</button>;
 };
-/* function memo(OldFunctionComponent){
-  return class extends React.PureComponent{
-    render(){
-      return <OldFunctionComponent {...this.props}/>
-    }
-  }
-} */
-Child = React.memo(Child); //useMemo和memo没有一点关系
+
+Child = React.memo(Child);
 
 function App() {
   const [number, setNumber] = useState(0);
